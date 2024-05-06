@@ -4,10 +4,15 @@ This project is worth **30% of your mark.**
 
 # Submission
 
-You should submit your solutions **via cssubmit** (see the link in the LMS menu). Submission is due at **15:00 (3:00 pm) on Thursday the 23rd of May**. You must submit **a .zip file** containing only a **`src` directory with the same structure as the project template** (see attached) **containing only .java files** 
+**when: 15:00 (3:00 pm) on Thursday May 23**
+**where: csssubmit**
+**format**: .zip retain dir structure
 # Testing
 
-Your submission will be tested (in part) by unpacking the .zip file, copying in the `test` package provided in the project template (overwriting any existing directory in your submission), moving into the `src` directory, and compiling and running the tests using commands equivalent to the following (example shown from Linux):
+- test package will be overwritten
+- it will output num of tests passed and estimate of mark
+- don't print anything
+- don't modify test package
 
 ```
 > cd src
@@ -15,13 +20,9 @@ src> javac **/*.java
 src> java test.Test
 ```
 
-Running the tests will output a summary of the test results, including lines summarizing the number of tests passed for each package, and an _estimate_ of your mark for that section, as well as overall. There is **no need for any of your code to print anything**, and doing so may interfere with the test output, which may affect your mark.
-
-Since the `test` package will be overwritten, **anything you submit in the test package may be erased**. There is no need to modify anything in the `test` package in the course of this project. If you do so, you are encouraged to make sure that your code still passes the unmodified tests.
-
 # Tasks
 
-Download and unzip the attached project template. You should have the following directory structure:
+You should have the following directory structure:
 
 ```
 src
@@ -40,11 +41,11 @@ src
 └── test/...
 ```
 
-Each directory (itertools, studentapi, etc.) is a Java package of the same name. There are 9 programming tasks spread between itertools and studentstats. You should complete all tasks. You are advised to read all tasks before beginning implementation. You are advised but not required to implement tasks in the order they are given below.
-
-Tasks are labelled with comments of the form `// TASK(N): Implement ...` throughout the code.
-
-For each task, details are provided in the documentation comments in the code, as well as below:
+- recommended to complete tasks in order
+- Each directory (itertools, studentapi, etc.) is a Java package of the same name. 
+- There are 9 programming tasks spread between itertools and studentstats. You should complete all tasks.
+- Tasks are labelled with comments of the form `// TASK(N): Implement ...` throughout the code.
+- For each task, details are provided in the documentation comments in the code, as well as below:
 
 ## itertools
 
