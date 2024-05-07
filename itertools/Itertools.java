@@ -149,6 +149,12 @@ public class Itertools {
      */
     public static <T, R> R reduce(Iterator<T> it, R init, BiFunction<R, T, R> f) {
         // TASK(7): Implement reduce
-        return new ReduceIterator<T,R>(it, init, f);
+        R result = init;
+
+        while(it.hasNext()) {
+            result = f.apply(result, it.next());
+        }
+        
+        return result;
     }
 }
