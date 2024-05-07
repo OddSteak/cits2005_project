@@ -25,19 +25,7 @@ public class Itertools {
      */
     public static <T> Iterator<T> take(Iterator<T> it, int count) {
         // TASK(1): Implement take
-        int lower = it.next();
-        int elTwo = it.next()
-        int step = elTwo - lower;
-        int upper = elTwo;
-
-        for(int i = 0; i < count-2; i++) {
-            if(!it.hasNext()) break;
-            upper = it.next();
-        }
-
-        res = new RangeIterator(lower, upper, step);
-
-        return res;
+        return new TakeIterator<T>(it, count);
     }
 
     /**
@@ -51,7 +39,7 @@ public class Itertools {
      */
     public static <T> Iterator<T> reversed(DoubleEndedIterator<T> it) {
         // TASK(2): Implement reversed
-        return null;
+        return new ReversedIterator<T>(it);
     }
 
     /**
@@ -72,7 +60,7 @@ public class Itertools {
      */
     public static <T> Iterator<T> filter(Iterator<T> it, Predicate<T> pred) {
         // TASK(3): Implement filter
-        return null;
+        return new FilterIterator<T>(it, pred);
     }
 
     /**
@@ -95,7 +83,7 @@ public class Itertools {
      */
     public static <T, R> Iterator<R> map(Iterator<T> it, Function<T, R> f) {
         // TASK(4): Implement map
-        return null;
+        return new MapIterator<T, R>(it, f);
     }
 
     /**
@@ -109,7 +97,7 @@ public class Itertools {
      */
     public static <T, R> DoubleEndedIterator<R> map(DoubleEndedIterator<T> it, Function<T, R> f) {
         // TASK(5): Implement map (double ended)
-        return null;
+        return new DoubleEndedMapIterator<T, R>(it, f);
     }
 
     /**
@@ -137,7 +125,7 @@ public class Itertools {
     public static <T, U, R> Iterator<R> zip(
             Iterator<T> lit, Iterator<U> rit, BiFunction<T, U, R> f) {
         // TASK(6): Implement zip
-        return null;
+        return new ZipIterator<T, U, R>(lit, rit, f);
     }
 
     /**
@@ -161,6 +149,6 @@ public class Itertools {
      */
     public static <T, R> R reduce(Iterator<T> it, R init, BiFunction<R, T, R> f) {
         // TASK(7): Implement reduce
-        return null;
+        return new ReduceIterator<T,R>(it, init, f);
     }
 }
