@@ -26,11 +26,13 @@ public class Itertools {
     public static <T> Iterator<T> take(Iterator<T> it, int count) {
         // TASK(1): Implement take
         int lower = it.next();
-        int step = it.next() - front;
-        int upper = lower;
+        int elTwo = it.next()
+        int step = elTwo - lower;
+        int upper = elTwo;
 
-        for(int i = 0; i < count-1; i++) {
-            upper += step
+        for(int i = 0; i < count-2; i++) {
+            if(!it.hasNext()) break;
+            upper = it.next();
         }
 
         res = new RangeIterator(lower, upper, step);
