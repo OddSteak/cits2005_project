@@ -25,7 +25,17 @@ public class Itertools {
      */
     public static <T> Iterator<T> take(Iterator<T> it, int count) {
         // TASK(1): Implement take
-        return null;
+        int lower = it.next();
+        int step = it.next() - front;
+        int upper = lower;
+
+        for(int i = 0; i < count-1; i++) {
+            upper += step
+        }
+
+        res = new RangeIterator(lower, upper, step);
+
+        return res;
     }
 
     /**
