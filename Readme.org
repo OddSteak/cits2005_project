@@ -1,30 +1,31 @@
-  * [ ] This project is worth **30% of your mark.**
+This project is worth *30% of your mark.*
 
-![Marking Rubric](Marking.png)
+[[./[[Marking.png]]]]
 
-# Submission
+* Submission
 
-**when: 15:00 (3:00 pm) on Thursday May 23**
-**where: csssubmit**
-**format**: .zip retain dir structure
-# Testing
+*when: 15:00 (3:00 pm) on Thursday May 23*
+*where: csssubmit*
+*format*: .zip retain dir structure
+
+* Testing
 
 - test package will be overwritten
 - it will output num of tests passed and estimate of mark
 - don't print anything
 - don't modify test package
 
-```
+#+BEGIN_SRC
 > cd src
 src> javac **/*.java
 src> java test.Test
-```
+#+END_SRC
 
-# Tasks
+* Tasks
 
 You should have the following directory structure:
 
-```
+#+BEGIN_SRC
 src
 ├── itertools
 │   ├── DoubleEndedIterator.java
@@ -39,7 +40,7 @@ src
 │   ├── StudentListIterator.java
 │   └── StudentStats.java
 └── test/...
-```
+#+END_SRC
 
 - recommended to complete tasks in order
 - Each directory (itertools, studentapi, etc.) is a Java package of the same name. 
@@ -47,14 +48,14 @@ src
 - Tasks are labelled with comments of the form `// TASK(N): Implement ...` throughout the code.
 - For each task, details are provided in the documentation comments in the code, as well as below:
 
-## itertools
+** itertools
 
 Iterators are a powerful tool in Object Oriented Programming. Java already provides a simple iterator interface (java.util.Iterator), but it is possible to make much more powerful and versatile iterators. The itertools package is a library of tools for working with iterators. You have been asked to implement a number of methods within itertools. You **are permitted and expected** to add your own new .java source files within itertools as appropriate.
 
 The itertools library provides the `DoubleEndedIterator<T>` interface, which represents an iterator that can be consumed either from the front or the back, and the `RangeIterator` class, as an example implementation of `DoubleEndedIterator`.
 
 A number of methods in this package use interfaces from Java's [java.util.function](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/package-summary.html) package, which represents different kinds of mathematical functions as objects so we can pass them as arguments to methods. Example implementations of these interfaces are included in the template source and tests.
-### TASK(1): Implement take
+*** TASK(1): Implement take
 
 Given an iterator and a number of elements, the `take` method returns an iterator over that number of elements taken from the iterator (or as many as it contains, if less than that number).
 
@@ -62,13 +63,13 @@ Elements should be consumed from the given iterator only as needed.
 
 This concept is called "laziness", in that it does not perform computation until it is required. In the case of iterators, this means that you should not simply copy elements into a data structure and then provide an iterator over that data structure, as this would pull a number of elements from the given iterator that may never be required.
 
-### TASK(2): Implement reversed
+*** TASK(2): Implement reversed
 
 The `reversed` method returns a (double ended) iterator in the reverse order of the one given.
 
 Elements should be consumed from the given iterator only as needed.
 
-### TASK(3): Implement filter
+*** TASK(3): Implement filter
 
 The `filter` method returns an iterator over only the elements of a given iterator that satisfy a given predicate. A predicate is a function used to determine if a particular property holds for an item. An example predicate could be "this integer is even", for which 4 would satisfy the predicate but 7 would not.
 
@@ -76,7 +77,7 @@ Elements should be consumed from the given iterator only as needed (though it ma
 
 Java's `java.util.function.Predicate` interface can be used by calling `pred.test(x)`, and will return `true` if and only if `x` satisfies the predicate.
 
-### TASK(4): Implement map (single ended)
+*** TASK(4): Implement map (single ended)
 
 The `map` method returns an iterator over the elements of a given iterator with a given function applied to each element.
 
@@ -88,11 +89,11 @@ Elements should be consumed from the given iterator only as needed.
 
 Java's `java.util.function.Function` interface can be used by calling `f.apply(x)` and will return `f(x)`.
 
-### TASK(5): Implement map (double ended)
+*** TASK(5): Implement map (double ended)
 
 Implement a double ended version of `map`.
 
-### TASK(6): Implement zip
+*** TASK(6): Implement zip
 
 The `zip` method returns an iterator over the results of combining each pair of elements from a pair of given iterators using a given function.
 
@@ -104,7 +105,7 @@ Elements should be consumed from the given iterators only as needed.
 
 Java's `java.util.function.BiFunction` interface can be used by calling `f.apply(x, y)` and will return `f(x, y)`.
 
-### TASK(7): Implement reduce
+*** TASK(7): Implement reduce
 
 The `reduce` method returns the result of combining all the elements from the given iterator using the given function.
 
@@ -116,7 +117,7 @@ An example of a common reduction would be "sum", where we reduce an iterator ove
 
 Java's `java.util.function.BiFunction` interface can be used by calling `f.apply(x, y)` and will return `f(x, y)`.
 
-## studentapi
+** studentapi
 
 **There is no reason to modify or add any code in this package.**
 
@@ -126,13 +127,13 @@ notably, the student list API is paginated, returning not a single student at a 
 
 Also, the `getPage()` API call is unreliable, and may sometimes time out before successfully completing, throwing a `QueryTimedOutException` to indicate as such.
 
-## studentstats
+** studentstats
 
 The studentstats package represents a hypothetical software tool we are building to compute some basic statistics about student records, such as the average mark for a unit or the most recently enrolled students at the university who have completed a particular unit.
 
 We would like to be able to use tools from the itertools library to implement these methods elegantly. To that end we will need to write an iterator over the list of students retrieved from the studentapi.
 
-### TASK(8): Implement StudentListIterator
+*** TASK(8): Implement StudentListIterator
 
 Implement a `DoubleEndedIterator` over the list of student records pulled from the student API.
 
@@ -140,7 +141,7 @@ Since calls to `getPage()` may fail with a `QueryTimedOutException`, your implem
 
 The iterator should not simply load the entire list and then iterate over it, as if we need to access only a prefix or suffix of the list, this would be extremely inefficient.
 
-### TASK(9): Implement unitNewestStudents
+*** TASK(9): Implement unitNewestStudents
 
 Finally, we can use the `StudentListIterator` you have just implemented to write methods for computing some useful statistics. An example method to compute the average mark for a unit is already implemented for you. You are asked to implement the `unitNewestStudents` method.
 
@@ -148,6 +149,6 @@ The `unitNewestStudents` method returns an iterator over the students who have t
 
 You should implement this method using the tools you have written for the itertools package. You are permitted to write additional helper classes inside studentstats.java.
 
-# Tasks Completed
+* Tasks Completed
 
 With all of the above tasks completed all the tests should pass. Be careful when running the tests to ensure you are running the unmodified tests and you have actually recompiled all your code. Double check the submission instructions to make sure your submission is in the right format. Read the marking rubric carefully.
