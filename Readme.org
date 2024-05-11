@@ -1,5 +1,7 @@
 This project is worth *30% of your mark.*
 
+#+CAPTION: Marking
+#+NAME: Marking
 [[./[[Marking.png]]]]
 
 * Submission
