@@ -43,7 +43,7 @@ src
 #+END_SRC
 
 - recommended to complete tasks in order
-- Each directory (itertools, studentapi, etc.) is a Java package of the same name. 
+- Each directory (itertools, studentapi, etc.) is a Java package of the same name.
 - There are 9 programming tasks spread between itertools and studentstats. You should complete all tasks.
 - Tasks are labelled with comments of the form ~// TASK(N): Implement ...~ throughout the code.
 - For each task, details are provided in the documentation comments in the code, as well as below:

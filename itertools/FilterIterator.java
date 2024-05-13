@@ -9,7 +9,7 @@ public class FilterIterator<T> implements Iterator<T> {
     private Iterator<T> it;
     private Predicate<T> pred;
     private T nextElement;
-    private boolean needNext = true;
+    private boolean needNew = true;
 
     public FilterIterator(Iterator<T> it, Predicate<T> pred) {
         this.it = it;
@@ -18,18 +18,19 @@ public class FilterIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        if(!needNext) return true;
+        if(!needNew ) return true;
         do {
             if(!it.hasNext()) return false;
             nextElement = it.next();
         } while(!pred.test(nextElement));
-        needNext = false;
+        needNew = false;
         return true;
     }
 
     @Override
     public T next() {
-        needNext = true;
+        if(!hasNext()) throw new NoSuchElementException();
+        needNew = true;
         return nextElement;
     }
 }

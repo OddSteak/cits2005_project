@@ -1,6 +1,5 @@
 package itertools;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ReversedIterator<T> implements DoubleEndedIterator<T> {
