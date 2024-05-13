@@ -1,7 +1,5 @@
 package studentstats;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import itertools.DoubleEndedIterator;
@@ -15,15 +13,15 @@ import studentapi.*;
  * StudentList#getPage}) only as needed.
  */
 public class StudentListIterator implements DoubleEndedIterator<Student> {
-    // TASK(8): Implement StudentListIterator: Add any fields you require
     private int retry;
     private StudentList slist;
     private int nPgs, nStudents, pgSize, nLastPg;
     private int frontPg, frontCount;
     private int backPg, backCount;
+    private Student[] frontArr, backArr;
+    // variables to track if a new page is needed
     private boolean needFPg = true;
     private boolean needBPg = true;
-    private ArrayList<Student> frontArr, backArr;
 
     /**
      * Construct an iterator over the given {@link StudentList} with the specified retry quota.
@@ -63,6 +61,8 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
     public boolean hasNext() {
         // TASK(8): Implement StudentListIterator
         if(frontPg == backPg && frontCount > backCount) return false;
+        if(frontPg == nPgs && needFPg) return false;
+        if(backPg == -1 && needBPg) return false;
         return true;
     }
 
@@ -71,28 +71,40 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
         // TASK(8): Implement StudentListIterator
         if(!hasNext()) throw new NoSuchElementException();
 
-        if(needFPg && frontPg == nPgs-1) throw new NoSuchElementException();
-        if(needFPg && frontPg != nPgs-1) {
+        if(needFPg) {
             boolean success = false;
             for(int i=0; i<retry; i++) {
                 try {
-                    frontArr = new ArrayList<>(Arrays.asList(slist.getPage(frontPg)));
+                    frontArr = slist.getPage(frontPg);
+                    if(frontArr.length == 0) {
+                        System.out.println("pg is " + frontPg);
+                        System.out.println("npg is " + nPgs);
+                    }
                     success = true;
                     needFPg = false;
-                    frontPg++;
                     frontCount = 0;
                     break;
                 } catch(QueryTimedOutException e) {
+                    success = false;
                     continue;
                 }
             }
-            if(!success) throw new ApiUnreachableException();
+            if(!success) {
+                throw new ApiUnreachableException();
+            }
         }
 
-        if(frontPg == nPgs-1 && frontCount == nLastPg - 1) needFPg = true;
-        else if(frontPg != nPgs-1 && frontCount == pgSize-1) needFPg = true;
+        Student result = frontArr[frontCount];
 
-        return frontArr.get(frontCount++);
+        if(frontCount == pgSize-1) {
+            needFPg = true;
+            frontPg++;
+            frontCount = 0;
+        } else {
+            frontCount++;
+        }
+
+        return result;
     }
 
     @Override
@@ -100,15 +112,13 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
         // TASK(8): Implement StudentListIterator
         if(!hasNext()) throw new NoSuchElementException();
 
-        if(needBPg && backPg == 0) throw new NoSuchElementException();
-        if(needBPg && backPg != 0) {
+        if(needBPg) {
             boolean success = false;
             for(int i=0; i<retry; i++) {
                 try {
-                    backArr = new ArrayList<>(Arrays.asList(slist.getPage(backPg)));
+                    backArr = slist.getPage(backPg);
                     success = true;
                     needBPg = false;
-                    backPg--;
                     backCount = pgSize - 1;
                     break;
                 } catch(QueryTimedOutException e) {
@@ -118,8 +128,16 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
             if(!success) throw new ApiUnreachableException();
         }
 
-        if(backCount == 0) needBPg = true;
+        Student result = backArr[backCount];
 
-        return backArr.get(backCount--);
+        if(backCount == 0) {
+            needBPg = true;
+            backPg--;
+            backCount = pgSize-1;
+        } else {
+            backCount--;
+        }
+
+        return result;
     }
 }
