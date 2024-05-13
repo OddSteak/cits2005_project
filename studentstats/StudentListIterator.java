@@ -16,9 +16,14 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
     private int retry;
     private StudentList slist;
     private int nPgs, nStudents, pgSize, nLastPg;
+
+    // variables to store position of the next/reverseNext element
     private int frontPg, frontCount;
     private int backPg, backCount;
+
+    // arrays to store the current page list
     private Student[] frontArr, backArr;
+
     // variables to track if a new page is needed
     private boolean needFPg = true;
     private boolean needBPg = true;
@@ -59,16 +64,13 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
 
     @Override
     public boolean hasNext() {
-        // TASK(8): Implement StudentListIterator
         if(frontPg == backPg && frontCount > backCount) return false;
-        if(frontPg == nPgs && needFPg) return false;
-        if(backPg == -1 && needBPg) return false;
+        if(frontPg > backPg) return false;
         return true;
     }
 
     @Override
     public Student next() {
-        // TASK(8): Implement StudentListIterator
         if(!hasNext()) throw new NoSuchElementException();
 
         if(needFPg) {
@@ -76,16 +78,10 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
             for(int i=0; i<retry; i++) {
                 try {
                     frontArr = slist.getPage(frontPg);
-                    if(frontArr.length == 0) {
-                        System.out.println("pg is " + frontPg);
-                        System.out.println("npg is " + nPgs);
-                    }
                     success = true;
                     needFPg = false;
-                    frontCount = 0;
                     break;
                 } catch(QueryTimedOutException e) {
-                    success = false;
                     continue;
                 }
             }
@@ -109,7 +105,6 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
 
     @Override
     public Student reverseNext() {
-        // TASK(8): Implement StudentListIterator
         if(!hasNext()) throw new NoSuchElementException();
 
         if(needBPg) {
@@ -119,7 +114,6 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
                     backArr = slist.getPage(backPg);
                     success = true;
                     needBPg = false;
-                    backCount = pgSize - 1;
                     break;
                 } catch(QueryTimedOutException e) {
                     continue;
