@@ -7,6 +7,7 @@ import studentapi.*;
 import java.util.Iterator;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /** A class for computing the average of a number of integer samples. */
 class IntegerAverage {
@@ -47,6 +48,19 @@ class GetUnitMark implements Function<Student, Integer> {
 
 // TASK(9): Implement unitNewestStudents: You may want to declare a class here.
 
+class isUnit implements Predicate<Student> {
+    String unit;
+
+    public isUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public boolean test(Student s) {
+        if(s.getMark(unit) == null) return false;
+        return true;
+    }
+}
+
 /** A collection of statistical and analytical methods for working with the student API. */
 public class StudentStats {
     /**
@@ -74,6 +88,8 @@ public class StudentStats {
      */
     public static Iterator<Student> unitNewestStudents(StudentList list, String unit) {
         // TASK(9): Implement unitNewestStudents
-        return null;
+        return Itertools.reversed(
+                                  Itertools.DoubleEndedFilter(new StudentListIterator(list),
+                                new isUnit(unit)));
     }
 }

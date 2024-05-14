@@ -24,7 +24,6 @@ public class Itertools {
      * @return An iterator over the first `count` elements of `it`.
      */
     public static <T> Iterator<T> take(Iterator<T> it, int count) {
-        // TASK(1): Implement take
         return new TakeIterator<T>(it, count);
     }
 
@@ -38,7 +37,6 @@ public class Itertools {
      * @return The reverse of the given iterator.
      */
     public static <T> Iterator<T> reversed(DoubleEndedIterator<T> it) {
-        // TASK(2): Implement reversed
         return new ReversedIterator<T>(it);
     }
 
@@ -59,8 +57,15 @@ public class Itertools {
      * @return An iterator over the elements of `it` with elements not satisfying `pred` removed.
      */
     public static <T> Iterator<T> filter(Iterator<T> it, Predicate<T> pred) {
-        // TASK(3): Implement filter
         return new FilterIterator<T>(it, pred);
+    }
+
+    /*
+     * filter function to return a double ended iterator
+     */
+
+    public static <T> DoubleEndedIterator<T> DoubleEndedFilter(DoubleEndedIterator<T> it, Predicate<T> pred) {
+        return new DoubleEndedFilterIterator<T>(it, pred);
     }
 
     /**
@@ -82,7 +87,6 @@ public class Itertools {
      * @return An iterator over the results of applying `f` to each element in `it`.
      */
     public static <T, R> Iterator<R> map(Iterator<T> it, Function<T, R> f) {
-        // TASK(4): Implement map
         return new MapIterator<T, R>(it, f);
     }
 
@@ -96,7 +100,6 @@ public class Itertools {
      * @return An iterator over the results of applying `f` to each element in `it`.
      */
     public static <T, R> DoubleEndedIterator<R> map(DoubleEndedIterator<T> it, Function<T, R> f) {
-        // TASK(5): Implement map (double ended)
         return new DoubleEndedMapIterator<T, R>(it, f);
     }
 
@@ -124,7 +127,6 @@ public class Itertools {
      */
     public static <T, U, R> Iterator<R> zip(
             Iterator<T> lit, Iterator<U> rit, BiFunction<T, U, R> f) {
-        // TASK(6): Implement zip
         return new ZipIterator<T, U, R>(lit, rit, f);
     }
 
@@ -148,7 +150,6 @@ public class Itertools {
      * @return The value after all elements have been combined.
      */
     public static <T, R> R reduce(Iterator<T> it, R init, BiFunction<R, T, R> f) {
-        // TASK(7): Implement reduce
         R result = init;
 
         while(it.hasNext()) {
