@@ -61,10 +61,15 @@ public class Itertools {
     }
 
     /*
-     * filter function to return a double ended iterator
+     * returns a double ended iterator over elements that satisfy a given
+     * {@link Predicate}
+     *
+     * @param <T> The type of elements in the iterator.
+     * @param it The iterator to filter.
+     * @param pred The predicate to use to determine whether to keep or drop an element
+     * @return A double ended iterator over the elements of it with elements that do not satisfy `pred` removed.
      */
-
-    public static <T> DoubleEndedIterator<T> DoubleEndedFilter(DoubleEndedIterator<T> it, Predicate<T> pred) {
+    public static <T> DoubleEndedIterator<T> doubleEndedFilter(DoubleEndedIterator<T> it, Predicate<T> pred) {
         return new DoubleEndedFilterIterator<T>(it, pred);
     }
 
@@ -155,7 +160,7 @@ public class Itertools {
         while(it.hasNext()) {
             result = f.apply(result, it.next());
         }
-        
+
         return result;
     }
 }

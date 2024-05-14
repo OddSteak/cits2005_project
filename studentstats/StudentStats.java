@@ -46,12 +46,10 @@ class GetUnitMark implements Function<Student, Integer> {
     }
 }
 
-// TASK(9): Implement unitNewestStudents: You may want to declare a class here.
-
-class isUnit implements Predicate<Student> {
+class HasUnit implements Predicate<Student> {
     String unit;
 
-    public isUnit(String unit) {
+    public HasUnit(String unit) {
         this.unit = unit;
     }
 
@@ -87,9 +85,9 @@ public class StudentStats {
      * @return An iterator over the students who have taken `unit`, from newest to oldest.
      */
     public static Iterator<Student> unitNewestStudents(StudentList list, String unit) {
-        // TASK(9): Implement unitNewestStudents
         return Itertools.reversed(
-                                  Itertools.DoubleEndedFilter(new StudentListIterator(list),
-                                new isUnit(unit)));
+                                  Itertools.doubleEndedFilter(
+                                           new StudentListIterator(list),
+                                           new HasUnit(unit)));
     }
 }
