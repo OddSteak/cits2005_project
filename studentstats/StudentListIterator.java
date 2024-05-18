@@ -77,23 +77,23 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
         if(!hasNext()) throw new NoSuchElementException();
 
         if(needFPg) {
-            boolean success = false;
-            for(int i=0; i<retry; i++) {
-                try {
-                    frontArr = slist.getPage(frontPg);
-                    success = true;
-                    needFPg = false;
-                    if(frontPg == backPg) {
-                        backArr = frontArr;
-                        needBPg = false;
+            //check if the needed page is in backArr
+            if(frontPg == backPg && !needBPg) {
+                frontArr = backArr;
+                needFPg = false;
+            } else {
+                boolean success = false;
+                for(int i=0; i<retry; i++) {
+                    try {
+                        frontArr = slist.getPage(frontPg);
+                        success = true;
+                        needFPg = false;
+                        break;
+                    } catch(QueryTimedOutException e) {
+                        continue;
                     }
-                    break;
-                } catch(QueryTimedOutException e) {
-                    continue;
                 }
-            }
-            if(!success) {
-                throw new ApiUnreachableException();
+                if(!success) throw new ApiUnreachableException();
             }
         }
 
@@ -116,22 +116,24 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
         if(!hasNext()) throw new NoSuchElementException();
 
         if(needBPg) {
-            boolean success = false;
-            for(int i=0; i<retry; i++) {
-                try {
-                    backArr = slist.getPage(backPg);
-                    success = true;
-                    needBPg = false;
-                    if(backPg == frontPg) {
-                        frontArr = backArr;
-                        needFPg = false;
+            // check if the needed page is in frontArr
+            if(backPg == frontPg && !needFPg) {
+                backArr = frontArr;
+                needBPg = false;
+            } else {
+                boolean success = false;
+                for(int i=0; i<retry; i++) {
+                    try {
+                        backArr = slist.getPage(backPg);
+                        success = true;
+                        needBPg = false;
+                        break;
+                    } catch(QueryTimedOutException e) {
+                        continue;
                     }
-                    break;
-                } catch(QueryTimedOutException e) {
-                    continue;
                 }
+                if(!success) throw new ApiUnreachableException();
             }
-            if(!success) throw new ApiUnreachableException();
         }
 
         Student result = backArr[backCount];
