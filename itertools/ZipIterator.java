@@ -4,6 +4,8 @@ import java.util.NoSuchElementException;
 import java.util.Iterator;
 import java.util.function.BiFunction;
 
+/** returns an iterator over the results of combining each pair of
+ * elements from a pair of given iterators using a given function. */
 public class ZipIterator<T, U, R> implements Iterator<R> {
 
     private Iterator<T> lit;
@@ -18,6 +20,7 @@ public class ZipIterator<T, U, R> implements Iterator<R> {
 
     @Override
     public boolean hasNext() {
+        // end the iterator when either of the given iterators end
         return lit.hasNext() && rit.hasNext();
     }
 

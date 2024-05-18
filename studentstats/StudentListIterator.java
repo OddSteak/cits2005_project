@@ -14,16 +14,17 @@ import studentapi.*;
 public class StudentListIterator implements DoubleEndedIterator<Student> {
     private int retry;
     private StudentList slist;
-    private int nPgs, nStudents, pgSize, nLastPg;
+    private int pgSize;
 
-    // variables to store position of the next/reverseNext element
+    // variables to track position of the next/reverseNext element
     private int frontPg, frontCount;
     private int backPg, backCount;
 
     // arrays to store the current page list
     private Student[] frontArr, backArr;
 
-    // variables to track if a new page is needed
+    // variables to track if a new page is needed for the next/reverseNext
+    // element
     private boolean needFPg = true;
     private boolean needBPg = true;
 
@@ -31,25 +32,28 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
      * Construct an iterator over the given {@link StudentList} with the specified retry quota.
      *
      * @param list The API interface.
-     * @param retries The number of times to retry a query after getting {@link
-     *     QueryTimedOutException} before declaring the API unreachable and throwing an {@link
-     *     ApiUnreachableException}.
+     * @param retries The number of times to retry a query after getting {@link QueryTimedOutException} before declaring the
+     * API unreachable and throwing an {@link ApiUnreachableException}.
      */
     public StudentListIterator(StudentList list, int retries) {
         this.slist = list;
-        this.retry= retries;
-        nPgs = list.getNumPages();
-        nStudents = list.getNumStudents();
+        this.retry = retries;
+
+        int nStudents = list.getNumStudents();
+        int nPgs = list.getNumPages();
         pgSize = list.getPageSize();
 
+        int lastPgSize; // pagesize of the last page
         if(nStudents % pgSize == 0) {
-            nLastPg = pgSize;
-        } else nLastPg = nStudents % pgSize;
+            lastPgSize = pgSize;
+        } else {
+            lastPgSize = nStudents % pgSize;
+        }
 
         frontPg = 0;
         frontCount = 0;
         backPg = nPgs - 1;
-        backCount = nLastPg - 1;
+        backCount = lastPgSize - 1;
     }
 
     /**
@@ -91,6 +95,7 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
 
         Student result = frontArr[frontCount];
 
+        // update the position of front element before returning the result
         if(frontCount == pgSize-1) {
             needFPg = true;
             frontPg++;
@@ -123,6 +128,7 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
 
         Student result = backArr[backCount];
 
+        // update the position of back element before returning the result
         if(backCount == 0) {
             needBPg = true;
             backPg--;

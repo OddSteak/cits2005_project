@@ -46,20 +46,6 @@ class GetUnitMark implements Function<Student, Integer> {
     }
 }
 
-/** A {@link Predicate} to test if a {@link Student} record contains a mark for a particular unit*/
-class HasUnit implements Predicate<Student> {
-    String unit;
-
-    public HasUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public boolean test(Student s) {
-        if(s.getMark(unit) == null) return false;
-        return true;
-    }
-}
-
 /** A collection of statistical and analytical methods for working with the student API. */
 public class StudentStats {
     /**
@@ -88,6 +74,6 @@ public class StudentStats {
     public static Iterator<Student> unitNewestStudents(StudentList list, String unit) {
         return Itertools.reverseFilter(
                                         new StudentListIterator(list),
-                                        new HasUnit(unit));
+                                        (Student st) -> st.getMark(unit) != null);
     }
 }
