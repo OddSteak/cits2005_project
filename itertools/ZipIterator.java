@@ -1,7 +1,7 @@
 package itertools;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Iterator;
 import java.util.function.BiFunction;
 
 public class ZipIterator<T, U, R> implements Iterator<R> {

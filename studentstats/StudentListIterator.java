@@ -9,8 +9,7 @@ import studentapi.*;
 /**
  * A (double ended) iterator over student records pulled from the student API.
  *
- * <p>This does not load the whole student list immediately, but rather queries the API ({@link
- * StudentList#getPage}) only as needed.
+ * <p>This does not load the whole student list immediately, but rather queries the API ({@link StudentList#getPage}) only as needed.
  */
 public class StudentListIterator implements DoubleEndedIterator<Student> {
     private int retry;

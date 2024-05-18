@@ -1,7 +1,7 @@
 package itertools;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Iterator;
 import java.util.function.Function;
 
 public class MapIterator<T, R> implements Iterator<R> {

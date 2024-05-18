@@ -46,6 +46,7 @@ class GetUnitMark implements Function<Student, Integer> {
     }
 }
 
+/** A {@link Predicate} to test if a {@link Student} record contains a mark for a particular unit*/
 class HasUnit implements Predicate<Student> {
     String unit;
 
@@ -85,9 +86,8 @@ public class StudentStats {
      * @return An iterator over the students who have taken `unit`, from newest to oldest.
      */
     public static Iterator<Student> unitNewestStudents(StudentList list, String unit) {
-        return Itertools.reversed(
-                                  Itertools.doubleEndedFilter(
-                                           new StudentListIterator(list),
-                                           new HasUnit(unit)));
+        return Itertools.reverseFilter(
+                                        new StudentListIterator(list),
+                                        new HasUnit(unit));
     }
 }

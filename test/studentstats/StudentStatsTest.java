@@ -33,7 +33,7 @@ public class StudentStatsTest {
 
             stats.expect(expected, received);
             // Can be done in 8 calls, but allow some leeway
-            stats.assertLessThanEqual(list.getCountGetPage(), 10, "too many calls to getPage()");
+            stats.assertLessThanEqual(list.getCountGetPage(), 8, "too many calls to getPage()");
         } catch (Exception e) {
             stats.exception(e);
         }
@@ -62,7 +62,7 @@ public class StudentStatsTest {
                 stats.expect(expected.next(), received.next().getId());
             }
             // Can be done in 3 calls, but allow some leeway
-            stats.assertLessThanEqual(list.getCountGetPage(), 5, "too many calls to getPage()");
+            stats.assertLessThanEqual(list.getCountGetPage(), 3, "too many calls to getPage()");
         } catch (Exception e) {
             stats.exception(e);
         }

@@ -1,3 +1,16 @@
+* Road Map
+
+** TODO Check if inheritance and hierarchy features are used properly
+** TODO Access modifiers
+** TODO Annotations & comments
+** TODO Javadoc
+** TODO check variable names
+** TODO Check if anon classes/lambda stuff can be used [1/2]
++ [X]  Itertools
++ [ ]  studentStats
+
+* Marking
+
 This project is worth *30% of your mark.*
 
 [[./Marking.png]]

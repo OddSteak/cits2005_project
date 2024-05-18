@@ -60,17 +60,17 @@ public class Itertools {
         return new FilterIterator<T>(it, pred);
     }
 
-    /*
-     * returns a double ended iterator over elements that satisfy a given
-     * {@link Predicate}
+    /**
+     * returns a double ended iterator over elements of a given iterator with those elements
+     * that do not satisfy a given {@link Predicate} dropped.
      *
      * @param <T> The type of elements in the iterator.
      * @param it The iterator to filter.
      * @param pred The predicate to use to determine whether to keep or drop an element
      * @return A double ended iterator over the elements of it with elements that do not satisfy `pred` removed.
      */
-    public static <T> DoubleEndedIterator<T> doubleEndedFilter(DoubleEndedIterator<T> it, Predicate<T> pred) {
-        return new DoubleEndedFilterIterator<T>(it, pred);
+    public static <T> Iterator<T> reverseFilter(DoubleEndedIterator<T> it, Predicate<T> pred) {
+        return new ReversedFilterIterator<T>(it, pred);
     }
 
     /**

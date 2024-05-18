@@ -2,6 +2,7 @@ package itertools;
 
 import java.util.NoSuchElementException;
 
+/** An iterator in the reverse order of the one given */
 public class ReversedIterator<T> implements DoubleEndedIterator<T> {
 
     private DoubleEndedIterator<T> it;
