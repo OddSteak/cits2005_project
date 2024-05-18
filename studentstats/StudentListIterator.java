@@ -83,6 +83,10 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
                     frontArr = slist.getPage(frontPg);
                     success = true;
                     needFPg = false;
+                    if(frontPg == backPg) {
+                        backArr = frontArr;
+                        needBPg = false;
+                    }
                     break;
                 } catch(QueryTimedOutException e) {
                     continue;
@@ -118,6 +122,10 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
                     backArr = slist.getPage(backPg);
                     success = true;
                     needBPg = false;
+                    if(backPg == frontPg) {
+                        frontArr = backArr;
+                        needFPg = false;
+                    }
                     break;
                 } catch(QueryTimedOutException e) {
                     continue;

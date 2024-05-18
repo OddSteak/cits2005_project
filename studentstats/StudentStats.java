@@ -7,7 +7,6 @@ import studentapi.*;
 import java.util.Iterator;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 /** A class for computing the average of a number of integer samples. */
 class IntegerAverage {
@@ -74,6 +73,7 @@ public class StudentStats {
     public static Iterator<Student> unitNewestStudents(StudentList list, String unit) {
         return Itertools.reverseFilter(
                                         new StudentListIterator(list),
-                                        (Student st) -> st.getMark(unit) != null);
+                                        (Student st) ->
+                                        st.getMark(unit) != null);
     }
 }

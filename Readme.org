@@ -5,9 +5,7 @@
 ** TODO Annotations & comments
 ** TODO Javadoc
 ** TODO check variable names
-** TODO Check if anon classes/lambda stuff can be used [1/2]
-+ [X]  Itertools
-+ [ ]  studentStats
+** DONE Check if anon classes/lambda stuff can be used
 
 * Marking
 

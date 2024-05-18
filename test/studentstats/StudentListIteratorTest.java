@@ -53,7 +53,7 @@ public class StudentListIteratorTest {
             }
             stats.expect(false, received.hasNext(), "iterator should be finished, hasNext");
             // Can be done in 3 calls, but allow some leeway
-            stats.assertLessThanEqual(list.getCountGetPage(), 5, "too many calls to getPage()");
+            stats.assertLessThanEqual(list.getCountGetPage(), 3, "too many calls to getPage()");
         } catch (Exception e) {
             stats.exception(e);
         }
@@ -69,7 +69,7 @@ public class StudentListIteratorTest {
             stats.expect("20948680", received.next().getId());
             stats.expect(false, received.hasNext());
             // Can be done in 1 call, but allow some leeway
-            stats.assertLessThanEqual(list.getCountGetPage(), 2, "too many calls to getPage()");
+            stats.assertLessThanEqual(list.getCountGetPage(), 1, "too many calls to getPage()");
         } catch (Exception e) {
             stats.exception(e);
         }
