@@ -4,7 +4,8 @@ import java.util.NoSuchElementException;
 import java.util.Iterator;
 import java.util.function.Function;
 
-/** an iterator over the elements of a given iterator with a given function applied to each element */
+/** an iterator over elements of a given iterator with a given function
+ * to each element */
 public class MapIterator<T, R> implements Iterator<R> {
 
     private Iterator<T> it;

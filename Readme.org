@@ -1,10 +1,11 @@
 * Road Map
 
-** TODO Check if inheritance and hierarchy features are used properly
-** TODO Access modifiers
-** TODO Annotations & comments
-** TODO Javadoc
-** TODO check variable names
+** DONE Check if inheritance and hierarchy features are used properly
+** DONE Access modifiers
+** DONE Annotations & comments
+** DONE Javadoc
+** DONE check variable names
+** TODO check dir structure of template
 ** DONE Check if anon classes/lambda stuff can be used
 
 * Marking
@@ -17,14 +18,13 @@ This project is worth *30% of your mark.*
 
 *when: 15:00 (3:00 pm) on Thursday May 23*
 *where: csssubmit*
-*format*: .zip retain dir structure
+*format*: .zip, retain dir structure of template. only .java files
 
 * Testing
 
 - test package will be overwritten
 - it will output num of tests passed and estimate of mark
 - don't print anything
-- don't modify test package
 
 #+BEGIN_SRC
 > cd src

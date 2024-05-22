@@ -4,11 +4,16 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
-/** An iterator with elements of a given iterator reversed and the ones that do not satisfy a given predicate dropped */
+/**
+ * An iterator over elements of a given {@link DoubleEndedIterator}
+ * reversed and the ones that do not satisfy a given {@link Predicate}
+ * dropped.
+ */
 public class ReversedFilterIterator<T> implements Iterator<T> {
 
     private DoubleEndedIterator<T> it;
     private Predicate<T> pred;
+
     // track if hasNext() needs to find a new element
     private boolean needNew = true;
     // store the next element to return

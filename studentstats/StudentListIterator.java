@@ -1,15 +1,16 @@
 package studentstats;
 
-import java.util.NoSuchElementException;
-
 import itertools.DoubleEndedIterator;
 
 import studentapi.*;
 
+import java.util.NoSuchElementException;
+
 /**
- * A (double ended) iterator over student records pulled from the student API.
+ * A {@link DoubleEndedIterator} over student records pulled from the student API.
  *
- * <p>This does not load the whole student list immediately, but rather queries the API ({@link StudentList#getPage}) only as needed.
+ * <p>This does not load the whole student list immediately, but rather
+ * queries the API ({@link StudentList#getPage}) only as needed.
  */
 public class StudentListIterator implements DoubleEndedIterator<Student> {
     private int retry;
@@ -20,19 +21,22 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
     private int frontPg, frontCount;
     private int backPg, backCount;
 
-    // arrays to store the current page list
+    // arrays to store the back and front pages
     private Student[] frontArr, backArr;
 
-    // variables to track if a new page is needed for the next/reverseNext
+    // booleans to track if a new page is needed for the next/reverseNext
     // element
     private boolean needFPg = true;
     private boolean needBPg = true;
 
     /**
-     * Construct an iterator over the given {@link StudentList} with the specified retry quota.
+     * Construct an iterator over the given {@link StudentList} with the
+     * given retry quota.
      *
-     * @param list The API interface.
-     * @param retries The number of times to retry a query after getting {@link QueryTimedOutException} before declaring the
+     * @param list The student API interface.
+     * @param retries The number of times to retry a query
+     * ({@link StudentList#getPage})
+     * after getting {@link QueryTimedOutException} before declaring the
      * API unreachable and throwing an {@link ApiUnreachableException}.
      */
     public StudentListIterator(StudentList list, int retries) {
@@ -43,7 +47,8 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
         int nPgs = list.getNumPages();
         pgSize = list.getPageSize();
 
-        int lastPgSize; // pagesize of the last page
+        // pagesize of the last page is needed to initialize backCount
+        int lastPgSize;
         if(nStudents % pgSize == 0) {
             lastPgSize = pgSize;
         } else {
@@ -57,9 +62,10 @@ public class StudentListIterator implements DoubleEndedIterator<Student> {
     }
 
     /**
-     * Construct an iterator over the given {@link StudentList} with a default retry quota of 3.
+     * Construct an iterator over the given {@link StudentList} with a retry
+     * quota of 3.
      *
-     * @param list The API interface.
+     * @param the student API interface.
      */
     public StudentListIterator(StudentList list) {
         this(list, 3);

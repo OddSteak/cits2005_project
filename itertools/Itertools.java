@@ -155,7 +155,7 @@ public class Itertools {
      * @return The value after all elements have been combined.
      */
     public static <T, R> R reduce(Iterator<T> it, R init, BiFunction<R, T, R> f) {
-        R result = init;
+        R result = init; // initializing result
 
         while(it.hasNext()) {
             result = f.apply(result, it.next());

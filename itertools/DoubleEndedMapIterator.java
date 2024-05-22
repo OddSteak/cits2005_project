@@ -3,7 +3,8 @@ package itertools;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
-/** A double ended iterator over the elements of a given iterator with a given function applied to each element */
+/** A double ended iterator over the elements of a given iterator with a
+ * given function applied to each element */
 public class DoubleEndedMapIterator<T, R> implements DoubleEndedIterator<R> {
 
     private DoubleEndedIterator<T> it;

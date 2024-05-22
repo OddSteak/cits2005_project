@@ -11,6 +11,7 @@ public class FilterIterator<T> implements Iterator<T> {
 
     private Iterator<T> it;
     private Predicate<T> pred;
+
     // tracks if hasNext() needs to find a new element
     private boolean needNew = true;
     // store the next element to return

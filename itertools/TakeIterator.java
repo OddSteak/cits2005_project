@@ -3,7 +3,9 @@ package itertools;
 import java.util.NoSuchElementException;
 import java.util.Iterator;
 
-/** An iterator over the given number of elements taken from a given iterator or as many as it contains, if less than that number*/
+/**
+ * An iterator over given number of elements from a given
+ * iterator or as many as it contains, if less than that number*/
 public class TakeIterator<T> implements Iterator<T> {
 
     private Iterator<T> it;
@@ -20,7 +22,8 @@ public class TakeIterator<T> implements Iterator<T> {
         if(!it.hasNext()) return false;
 
         // unless the iterator has ended,
-        // there remains elements to return as long as we have taken less than count.
+        // there remains elements to return as long as we have taken less
+        // than count.
         return numTaken < count;
     }
 
