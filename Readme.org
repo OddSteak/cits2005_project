@@ -5,7 +5,7 @@
 ** DONE Annotations & comments
 ** DONE Javadoc
 ** DONE check variable names
-** TODO check dir structure of template
+** DONE check dir structure of template
 ** DONE Check if anon classes/lambda stuff can be used
 
 * Marking
